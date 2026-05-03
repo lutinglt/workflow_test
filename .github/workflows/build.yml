@@ -54,7 +54,7 @@ jobs:
     steps:
       - run: echo ${{ matrix.module }}
   build-image:
-    needs: [unit-test, arch-test, integration-test, code-analysis, matrix-e2e]
+    needs: [unit-test, arch-test, integration-test, matrix-e2e]
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
