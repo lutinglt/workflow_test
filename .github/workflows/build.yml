@@ -1,0 +1,58 @@
+name: doris workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  job-100:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  job-101:
+    needs: job-100
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  job-102:
+    needs: job-101
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  job-103:
+    needs: job-100
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  prep-jdk:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  unit-test:
+    needs: prep-jdk
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  arch-test:
+    needs: prep-jdk
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  integration-test:
+    needs: prep-jdk
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  matrix-e2e:
+    strategy:
+      matrix:
+        module: [test1, test2, test3, test4, test5, test6]
+    steps:
+      - run: echo ${{ matrix.module }}
+  build-image:
+    needs: [unit-test, arch-test, integration-test, code-analysis, matrix-e2e]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
