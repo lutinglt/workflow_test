@@ -1,4 +1,4 @@
-name: workflow-devtest-complex
+name: user-workflow
 on:
   push:
 
