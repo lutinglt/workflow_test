@@ -1,0 +1,37 @@
+name: workflow-devtest-complex
+on:
+  push:
+
+jobs:
+  置备JDK:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  单元测试:
+    needs: 置备JDK
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  架构测试:
+    needs: 置备JDK
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  集成测试:
+    needs: 置备JDK
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  代码分析:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  构建镜像:
+    needs:
+      - 单元测试
+      - 架构测试
+      - 集成测试
+      - 代码分析
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"

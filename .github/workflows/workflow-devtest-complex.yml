@@ -1,6 +1,6 @@
-name: doris workflow
+name: workflow-devtest-complex
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
   job-100:
@@ -22,37 +22,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
-  prep-jdk:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "hello"
-  unit-test:
-    needs: prep-jdk
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "hello"
-  arch-test:
-    needs: prep-jdk
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "hello"
-  integration-test:
-    needs: prep-jdk
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "hello"
   code-analysis:
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
+  prep-jdk:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
   matrix-e2e:
-    needs: code-analysis
+    needs: [job-100, prep-jdk]
     runs-on: ubuntu-latest
     strategy:
       matrix:
         module: [test1, test2, test3, test4, test5, test6]
     steps:
       - run: echo ${{ matrix.module }}
+  unit-test:
+    needs: [prep-jdk, code-analysis]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  arch-test:
+    needs: [prep-jdk, code-analysis]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+  integration-test:
+    needs: [prep-jdk, code-analysis]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
   build-image:
     needs: [unit-test, arch-test, integration-test, matrix-e2e]
     runs-on: ubuntu-latest
