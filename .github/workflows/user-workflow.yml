@@ -3,35 +3,35 @@ on:
   push:
 
 jobs:
-  置备JDK:
+  setup-jdk:
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
-  单元测试:
-    needs: 置备JDK
+  unit-test:
+    needs: setup-jdk
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
-  架构测试:
-    needs: 置备JDK
+  architecture-test:
+    needs: setup-jdk
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
-  集成测试:
-    needs: 置备JDK
+  integration-test:
+    needs: setup-jdk
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
-  代码分析:
+  code-analysis:
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
-  构建镜像:
+  build-image:
     needs:
-      - 单元测试
-      - 架构测试
-      - 集成测试
-      - 代码分析
+      - unit-test
+      - architecture-test
+      - integration-test
+      - code-analysis
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello"
